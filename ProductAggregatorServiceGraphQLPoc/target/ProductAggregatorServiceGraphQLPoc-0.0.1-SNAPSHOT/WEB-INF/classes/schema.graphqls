@@ -1,0 +1,14 @@
+schema {
+ query: Query
+}
+
+type Query {
+  productById(id: Int): Product 
+}
+
+type Product {
+  productID: Int
+  productName: String
+  productInventory: Int
+  
+}

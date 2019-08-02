@@ -1,0 +1,7 @@
+com\infy\poc\ProductAggregatorServiceGraphQLPoc\DTO\Product.class
+com\infy\poc\ProductAggregatorServiceGraphQLPoc\graphql\GraphQLService.class
+com\infy\poc\ProductAggregatorServiceGraphQLPoc\DTO\ProductInventory.class
+com\infy\poc\ProductAggregatorServiceGraphQLPoc\controller\ProductAggregatorController.class
+com\infy\poc\ProductAggregatorServiceGraphQLPoc\DTO\ProductInventoryDetail.class
+com\infy\poc\ProductAggregatorServiceGraphQLPoc\graphql\datafetcher\ProductInventoryDataFatcher.class
+com\infy\poc\ProductAggregatorServiceGraphQLPoc\ProductAggregatorServiceGraphQlPocApplication.class
