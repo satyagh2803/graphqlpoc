@@ -2,7 +2,6 @@ package com.infy.poc.ProductAggregatorServiceGraphQLPoc.graphql.datafetcher;
 
 import java.util.Arrays;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,23 +21,34 @@ import graphql.schema.DataFetchingEnvironment;
 public class ProductInventoryDataFatcher implements DataFetcher<ProductInventoryDetail> {
 
 	@Autowired
-	RestTemplate restTemplate;
+	public RestTemplate restTemplate;
+	//@Autowired
+	//OAuthUser oAuthUser;
+	
+	public static final String token = "Bearer ya29.GlxbB_0PfTnYmCRINbhQl-YQK70EvsOaYj2J1NyAqe0yektFj6DXVv5G2ZLWRK6k0Vz4pf0uCyB0sgAqulqOqCGwAIuh9z9V9-PNxNmd6m8MATc2xUxKsGIHN0Ylqg";
+
+	
 
 	@Override
 	public ProductInventoryDetail get(DataFetchingEnvironment dataFetchingEnvironment) {
 
 		int productID = dataFetchingEnvironment.getArgument("id");
 
+	//	MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+	   // headers.add("Authorization", String.format("%s %s", oAuthUser.getTokenType(), oAuthUser.getAccessToken()));
+		
 		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		//headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		//headers.add("Authorization", String.format("%s %s", oAuthUser.getTokenType(), oAuthUser.getAccessToken()));
+		headers.add("Authorization", token);
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
-
-		Product product = restTemplate.exchange("https://pspocmacys.appspot.com/product/productService/" + productID,
-				HttpMethod.GET, entity, Product.class).getBody();
+		//System.out.println("Access Token "+oAuthUser.getAccessToken());
+		Product product = restTemplate.exchange("https://pspocmacys.appspot.com/product/productService/".trim() + productID,
+		HttpMethod.GET, entity, Product.class).getBody();
 		System.out.println("outputIs:" + product);
 
 		ProductInventory productInv = restTemplate
-				.exchange("https://pspocmacys.appspot.com/product/productInventoryService/" + productID, HttpMethod.GET, entity,
+				.exchange("https://pspocmacys.appspot.com/product/productInventoryService/".trim() + productID, HttpMethod.GET, entity,
 						ProductInventory.class)
 				.getBody();
 		System.out.println("outputIs:" + productInv);

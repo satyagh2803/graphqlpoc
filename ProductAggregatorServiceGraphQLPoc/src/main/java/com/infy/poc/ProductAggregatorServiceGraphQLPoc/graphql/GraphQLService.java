@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ public class GraphQLService {
 	private GraphQL graphQL;
 	
 	@Autowired
-	private ProductInventoryDataFatcher proInvDataFetcher;
+	public ProductInventoryDataFatcher proInvDataFetcher;
 
 	// load schema at application start up
 	@PostConstruct
@@ -50,6 +51,7 @@ public class GraphQLService {
 				.type("Query", typeWiring -> typeWiring.dataFetcher("productById", proInvDataFetcher)).build();
 	}
 
+	@Bean
 	public GraphQL getGraphQL() {
 		return graphQL;
 	}
